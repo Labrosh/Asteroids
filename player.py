@@ -47,3 +47,13 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         shot.velocity = forward * PLAYER_SHOOT_SPEED
         self.shoot_timer = PLAYER_SHOOT_COOLDOWN
+
+    def check_collision(self, other):
+        """
+        Check for collision using point-in-polygon for each point of the triangle.
+        """
+        triangle_points = self.triangle()
+        for point in triangle_points:
+            if other.point_in_polygon(point, other.get_polygon()):
+                return True
+        return False
