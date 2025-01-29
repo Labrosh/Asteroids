@@ -31,3 +31,13 @@ class Asteroid(CircleShape):
         asteroid2 = Asteroid(self.position.x, self.position.y, new_radius)
         asteroid2.velocity = velocity2
         asteroid2.add(*self.groups())
+
+    def get_polygon(self):
+        """
+        Get the polygon representation of the asteroid.
+        """
+        points = []
+        for angle in range(0, 360, 45):
+            point = pygame.Vector2(self.radius, 0).rotate(angle)
+            points.append(self.position + point)
+        return points
