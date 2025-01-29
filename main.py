@@ -44,6 +44,11 @@ def main():
                 print("Game over!")
                 pygame.quit()
                 return
+            for shot in shots:
+                if shot.check_collision(asteroid):
+                    shot.kill()
+                    asteroid.split()
+                    asteroid.kill()
         pygame.display.flip()
         dt = clock.tick(60) / 1000  # Control the frame rate and update dt
 
