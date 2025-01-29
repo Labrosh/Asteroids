@@ -11,7 +11,12 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    updatable.add(player)
+    drawable.add(player)
 
     while True:
         for event in pygame.event.get():
@@ -19,8 +24,9 @@ def main():
                 pygame.quit()
                 return
         screen.fill((0, 0, 0))
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        for drawable_object in drawable:
+            drawable_object.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000  # Control the frame rate and update dt
 
